@@ -1,14 +1,17 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  run-python-app:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [3.8, 3.9, 3.10]    
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
-          python-version: 3.8
+          python-version: ${{ matrix.version }}
       - name: run main.py
         run: python main.py
       - name: get python version
